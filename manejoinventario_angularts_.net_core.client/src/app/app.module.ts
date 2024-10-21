@@ -7,7 +7,7 @@ import { MenuComponent } from './Component/menu/menu.component';
 import { HomeComponent } from './Component/home/home.component';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -21,6 +21,7 @@ import { FormsModule } from '@angular/forms';
     RouterModule,
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

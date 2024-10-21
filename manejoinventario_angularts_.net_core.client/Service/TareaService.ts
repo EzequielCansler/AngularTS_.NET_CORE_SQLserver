@@ -9,13 +9,26 @@ import { Tarea } from '../src/models/tarea.model';
 
 export class TareaService {
   private apiUrl = "https://localhost:7006/api/tarea";
+
   constructor(private http: HttpClient) { }
 
   getAllTareas(): Observable<Tarea[]> {
     return this.http.get<Tarea[]>(this.apiUrl);
   }
 
-  getTareasById(id: number): Observable<Tarea> {
+  getTareaById(id: number): Observable<Tarea> {
     return this.http.get<Tarea>(`${this.apiUrl}/${id}`);
+  }
+
+
+  createOrUpdate(tarea: Tarea, id: (number | null)): Observable<any>
+  {
+    if (id) {
+      return this.http.post(`${this.apiUrl}/${id}`, tarea);
+    }
+    else
+    {
+      return this.http.post(this.apiUrl, tarea);
+    }
   }
 }

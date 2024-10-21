@@ -12,6 +12,9 @@ builder.Services.AddDbContext<DB>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddScoped<ITareaService, TareaService>();
+builder.Services.AddScoped<IPrioridadService, PrioridadService>();
+
+builder.Services.AddScoped<IPrioridadRepository, PrioridadReporitory>();
 builder.Services.AddScoped<ITareaRepository, TareaRepository>();
 var app = builder.Build();
 

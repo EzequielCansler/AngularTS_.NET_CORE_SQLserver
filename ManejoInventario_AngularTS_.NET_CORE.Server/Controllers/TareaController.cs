@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ManejoInventario_AngularTS_.NET_CORE.Server.Controllers
 {
-    [Route("/api/tarea/")]
+    [Route("api/tarea")]
     [ApiController]
     public class TareaController : ControllerBase
     {
@@ -16,7 +16,7 @@ namespace ManejoInventario_AngularTS_.NET_CORE.Server.Controllers
             _tareaService = tareaService;
         }
 
-        // GET: TareasController
+        // GET: Tareas
         [HttpGet]
         public ActionResult<List<Tarea>> GetTareas()
         {
@@ -24,7 +24,7 @@ namespace ManejoInventario_AngularTS_.NET_CORE.Server.Controllers
             return Ok(tarea);
         }
 
-        // GET: TareasController/Details/5
+        // GET: Tareas/id
         [HttpGet("{id}")]
         public ActionResult GetTareaById(int id)
         {
@@ -32,67 +32,21 @@ namespace ManejoInventario_AngularTS_.NET_CORE.Server.Controllers
             return Ok(tarea);
         }
 
-        //// GET: TareasController/Create
-        //public ActionResult Create()
-        //{
-        //    return View();
-        //}
+        // POST: Tareas/CreateOrUpdate
+        [HttpPost("{id?}")]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateOrUpdate([FromBody] Tarea tarea, int? id)
+        {
+            try
+            {
+                _tareaService.AddOrUpdate(tarea,id);
+                return Ok(new { success = true, message = "Tarea guardad exitosamente" });
+            }
+            catch (Exception ex) 
+            { 
+                return BadRequest(new {success = false, message = ex.Message});
+            }
+        }
 
-        //// POST: TareasController/Create
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Create(IFormCollection collection)
-        //{
-        //    try
-        //    {
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
-        //}
-
-        //// GET: TareasController/Edit/5
-        //public ActionResult Edit(int id)
-        //{
-        //    return View();
-        //}
-
-        //// POST: TareasController/Edit/5
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Edit(int id, IFormCollection collection)
-        //{
-        //    try
-        //    {
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
-        //}
-
-        //// GET: TareasController/Delete/5
-        //public ActionResult Delete(int id)
-        //{
-        //    return View();
-        //}
-
-        //// POST: TareasController/Delete/5
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Delete(int id, IFormCollection collection)
-        //{
-        //    try
-        //    {
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
-        //}
     }
 }

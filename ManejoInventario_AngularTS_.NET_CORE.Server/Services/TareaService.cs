@@ -1,5 +1,6 @@
 ﻿using ManejoInventario_AngularTS_.NET_CORE.Server.Models;
 using ManejoInventario_AngularTS_.NET_CORE.Server.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace ManejoInventario_AngularTS_.NET_CORE.Server.Services
 {
@@ -7,6 +8,8 @@ namespace ManejoInventario_AngularTS_.NET_CORE.Server.Services
     {
         List<Tarea> GetAll();
         Tarea GetById(int id);
+        void AddOrUpdate(Tarea tarea, int? id);
+
     }
     public class TareaService: ITareaService
     {
@@ -20,13 +23,21 @@ namespace ManejoInventario_AngularTS_.NET_CORE.Server.Services
         public List<Tarea> GetAll()
         {
             var tareas = _tareaRepository.GetAll();
-            Console.WriteLine($"Tareas obtenidas: {tareas.Count}"); // Verificar cuántas tareas hay
+            
             return tareas;
         }
+      
+
         public Tarea GetById(int id)
         {
             return _tareaRepository.GetById(id);
         }
+
+        public void AddOrUpdate(Tarea tarea,int? id)
+        {
+           _tareaRepository.AddOrUpdate(tarea,id);
+        }
+
     }
     
 }
