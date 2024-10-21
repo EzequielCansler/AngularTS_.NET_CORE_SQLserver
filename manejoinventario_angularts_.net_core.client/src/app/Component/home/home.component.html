@@ -1,0 +1,38 @@
+<div class="d-flex justify-content-center align-items-center mt-4 ">
+  <form class="bg-body-secondary p-4 rounded-3 w-25">
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label ">Titulo de la Tarea</label>
+      <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    </div>
+    <div class="form-floating mb-3">
+      <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+      <label for="floatingTextarea2">Comentarios</label>
+    </div>
+    <div class="form-floating">
+      <select class="form-select " id="floatingSelect" aria-label="Floating label select example">
+        <option selected>Prioridad</option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+      </select>
+      <label for="floatingSelect">nivel de prioridad</label>
+    </div>
+    <div class="m-2">
+      <button type="submit" class="btn btn-primary">Crear</button>
+    </div>
+  </form>
+</div>
+
+<h2>TAREAS</h2>
+<<div class="row mt-5">
+  <div class="col-sm-6 mb-3 mb-sm-0" *ngFor="let tarea of tareas">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">{{ tarea.titulo }}</h5>
+        <p class="card-text">{{ tarea.descripcion }}</p>
+        <!--<span class="badge bg-secondary">Prioridad: {{ tarea.prioID }}</span>-->
+        <a href="#" class="btn btn-primary">Detalles</a>
+      </div>
+    </div>
+  </div>
+</div>
