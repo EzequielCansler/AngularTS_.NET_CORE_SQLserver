@@ -1,6 +1,0 @@
-@ManejoInventario_AngularTS_.NET_CORE.Server_HostAddress = http://localhost:5073
-
-GET {{ManejoInventario_AngularTS_.NET_CORE.Server_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###

@@ -20,17 +20,19 @@ export class TareaService {
 
   getTareaById(Id: number): Observable<Tarea> {
     
-    return this.http.get<Tarea>(`${this.apiUrl}/${Id}`);
+    return this.http.get<Tarea>(`${this.apiUrl}/detail/${Id}`);
   }
 
 
   createOrUpdate(tarea: Tarea): Observable<any>
   {
-    const body = JSON.stringify(tarea);
-    return this.http.post(this.apiUrl, body, {
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    });
+    const data = this.http.post(this.apiUrl, tarea); // No era necesario parsear a json tarea
+    return data;
+    //const body = JSON.stringify(tarea);
+    //return this.http.post(this.apiUrl, body, {
+    //  headers: {
+    //    'Content-Type': 'application/json'
+    //  }
+    //});
   }
 }

@@ -25,10 +25,10 @@ namespace ManejoInventario_AngularTS_.NET_CORE.Server.Controllers
         }
 
         
-        [HttpGet("{id}")]
-        public ActionResult GetTareaById(int id)
+        [HttpGet("detail/{Id}")]
+        public ActionResult GetTareaById(int Id)
         {
-            Tarea tarea = _tareaService.GetById(id);
+            Tarea tarea = _tareaService.GetById(Id);
             return Ok(tarea);
         }
 

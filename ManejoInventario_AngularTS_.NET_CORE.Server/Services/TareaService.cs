@@ -7,7 +7,7 @@ namespace ManejoInventario_AngularTS_.NET_CORE.Server.Services
     public interface ITareaService
     {
         List<Tarea> GetAll();
-        Tarea GetById(int id);
+        Tarea GetById(int Id);
         void AddOrUpdate(Tarea tarea, int? id);
 
     }
@@ -28,9 +28,9 @@ namespace ManejoInventario_AngularTS_.NET_CORE.Server.Services
         }
       
 
-        public Tarea GetById(int id)
+        public Tarea GetById(int Id)
         {
-            return _tareaRepository.GetById(id);
+            return _tareaRepository.GetById(Id);
         }
 
         public void AddOrUpdate(Tarea tarea,int? id)

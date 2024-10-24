@@ -29,8 +29,7 @@
       <div class="card-body">
         <h5 class="card-title">{{ tarea.Titulo }}</h5>
         <p class="card-text">{{ tarea.Descripcion }}</p>
-        
-        <a href="#" class="btn btn-primary">Editar</a>
+        <a [routerLink]="['/detail',tarea.Id]" class="btn btn-primary">Detalle</a>
       </div>
     </div>
   </div>

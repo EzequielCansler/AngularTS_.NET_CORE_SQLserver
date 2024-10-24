@@ -9,7 +9,7 @@ namespace ManejoInventario_AngularTS_.NET_CORE.Server.Repositories
     public interface ITareaRepository
     {
         List<Tarea> GetAll();
-        Tarea GetById(int id);
+        Tarea GetById(int Id);
         void AddOrUpdate(Tarea tarea, int? id);
     }
 
@@ -27,9 +27,9 @@ namespace ManejoInventario_AngularTS_.NET_CORE.Server.Repositories
             return _context.Tarea.Include(t => t.Prioridad).ToList();
         }
 
-        public Tarea GetById(int id)
+        public Tarea GetById(int Id)
         {
-            Tarea tarea = _context.Tarea.FirstOrDefault(x => x.Id == id)
+            Tarea tarea = _context.Tarea.FirstOrDefault(x => x.Id == Id)
                           ?? throw new Exception("Tarea no encontrada");
 
             return tarea;
