@@ -13,22 +13,24 @@ export class TareaService {
   constructor(private http: HttpClient) { }
 
   getAllTareas(): Observable<Tarea[]> {
-    return this.http.get<Tarea[]>(this.apiUrl);
+    const data = this.http.get<Tarea[]>(this.apiUrl);
+    
+    return data;
   }
 
-  getTareaById(id: number): Observable<Tarea> {
-    return this.http.get<Tarea>(`${this.apiUrl}/${id}`);
+  getTareaById(Id: number): Observable<Tarea> {
+    
+    return this.http.get<Tarea>(`${this.apiUrl}/${Id}`);
   }
 
 
-  createOrUpdate(tarea: Tarea, id: (number | null)): Observable<any>
+  createOrUpdate(tarea: Tarea): Observable<any>
   {
-    if (id) {
-      return this.http.post(`${this.apiUrl}/${id}`, tarea);
-    }
-    else
-    {
-      return this.http.post(this.apiUrl, tarea);
-    }
+    const body = JSON.stringify(tarea);
+    return this.http.post(this.apiUrl, body, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
   }
 }

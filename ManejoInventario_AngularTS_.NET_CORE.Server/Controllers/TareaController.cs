@@ -16,7 +16,7 @@ namespace ManejoInventario_AngularTS_.NET_CORE.Server.Controllers
             _tareaService = tareaService;
         }
 
-        // GET: Tareas
+        
         [HttpGet]
         public ActionResult<List<Tarea>> GetTareas()
         {
@@ -24,7 +24,7 @@ namespace ManejoInventario_AngularTS_.NET_CORE.Server.Controllers
             return Ok(tarea);
         }
 
-        // GET: Tareas/id
+        
         [HttpGet("{id}")]
         public ActionResult GetTareaById(int id)
         {
@@ -32,19 +32,29 @@ namespace ManejoInventario_AngularTS_.NET_CORE.Server.Controllers
             return Ok(tarea);
         }
 
-        // POST: Tareas/CreateOrUpdate
-        [HttpPost("{id?}")]
-        [ValidateAntiForgeryToken]
-        public ActionResult CreateOrUpdate([FromBody] Tarea tarea, int? id)
+       
+        [HttpPost]
+        public ActionResult CreateOrUpdate([FromBody] Tarea tarea)
         {
             try
             {
-                _tareaService.AddOrUpdate(tarea,id);
-                return Ok(new { success = true, message = "Tarea guardad exitosamente" });
+                // Si el Id es nulo o 0, se trata de una nueva tarea
+                if (tarea.Id == 0 || tarea.Id == null)
+                {
+                    // Crear nueva tarea
+                    _tareaService.AddOrUpdate(tarea, null);
+                }
+                else
+                {
+                    // Actualizar tarea existente
+                    _tareaService.AddOrUpdate(tarea, tarea.Id);
+                }
+
+                return Ok(new { success = true, message = "Tarea guardada exitosamente" });
             }
-            catch (Exception ex) 
-            { 
-                return BadRequest(new {success = false, message = ex.Message});
+            catch (Exception ex)
+            {
+                return BadRequest(new { success = false, message = ex.Message });
             }
         }
 

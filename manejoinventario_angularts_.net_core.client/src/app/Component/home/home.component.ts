@@ -19,10 +19,10 @@ export class HomeComponent implements OnInit{
 
   constructor(private tareaService: TareaService, private prioridadService: PrioridadService, private fb: FormBuilder) {
     this.tareaForm = this.fb.group({
-      id: [null],
-      titulo: [''],
-      descripcion: [''],
-      prioID:[''],
+      Id: [null],
+      Titulo: [''],
+      Descripcion: [''],
+      PrioID: [null],
     });
   }
 
@@ -33,6 +33,7 @@ export class HomeComponent implements OnInit{
 
   loadTareas(): void {
     this.tareaService.getAllTareas().subscribe(tareas => {
+      console.log(tareas);
       this.tareas = tareas;
     })
   }
@@ -48,29 +49,52 @@ export class HomeComponent implements OnInit{
     const tareaData = this.tareaForm.value;
 
     if (this.editMode) {
-      // Si estamos en modo edición, utilizamos el ID existente
-      tareaData.id = this.tarea.id; // Asegúrate de que el ID se añada a los datos de la tarea
+      tareaData.Id = this.tarea.Id;
+    }
+    else {
+      
+      tareaData.EstaCompleto = false;
     }
 
-    this.tareaService.createOrUpdate(tareaData,null).subscribe(
+    tareaData.PrioID = parseInt(tareaData.PrioID, 10);
+    console.log(tareaData);
+    this.tareaService.createOrUpdate(tareaData).subscribe(
       response => {
-        console.log(response.message);
+        console.log('Respuesta del servidor:', response);
         this.loadTareas();
         this.resetForm();
       },
       error => {
-        console.log(error.message);
+        console.log(error.message); // mensaje generico de error 400/405/500 etc
+        console.log('Detalles del error:', error.error); // muy bueno para encontrar el error, devuelve el objeto con detalles de validacion
       }
     );
   }
 
+  editTarea(tarea: Tarea): void {
+    this.tarea = tarea; // Cargar la tarea a editar
+    this.editMode = true; // Cambiar a modo edición
 
-
-
-
-  resetForm(): void {
-    this.tarea = new Tarea();
-    this.editMode = false;
+    // Llenar el formulario con los valores de la tarea
+    this.tareaForm.patchValue({
+      id: tarea.Id,
+      titulo: tarea.Titulo,
+      descripcion: tarea.Descripcion,
+      prioID: tarea.PrioID
+    });
   }
 
+  resetForm(): void {
+    {
+      this.tareaForm.reset({
+        Id: null,
+        Titulo: '',
+        Descripcion: '',
+        PrioID: null
+      });
+      this.editMode = false;
+    }
+
+
+  }
 }

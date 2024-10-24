@@ -1,8 +1,9 @@
 export class Prioridad {
-  id?: number;
-  nombre: string;
+  PrioID?: number;
+  Nombre: string;
 
   constructor() {
-    this.nombre = '';
+    this.PrioID = 1;
+    this.Nombre = '';
   }
 }

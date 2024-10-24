@@ -24,7 +24,7 @@ namespace ManejoInventario_AngularTS_.NET_CORE.Server.Repositories
 
         public List<Tarea> GetAll()
         {
-            return _context.Tarea.ToList();
+            return _context.Tarea.Include(t => t.Prioridad).ToList();
         }
 
         public Tarea GetById(int id)

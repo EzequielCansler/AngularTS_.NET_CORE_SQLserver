@@ -1,16 +1,18 @@
+import { Prioridad } from "./prioridad.model";
+
 export class Tarea {
-  id?: number;
-  titulo: string;
-  descripcion: string;
-  estaCompleto: boolean;
-  prioID: number;
-  Prioridad: { nombre: string } = { nombre: '' };
+  Id?: number;
+  Titulo: string;
+  Descripcion: string;
+  EstaCompleto: boolean;
+  PrioID: number;
+  Prioridad: Prioridad;
 
   constructor() {
-    this.titulo = '';
-    this.descripcion = '';
-    this.estaCompleto = false; // Inicializa si es completada o no
-    this.prioID = 1; // Inicializa la prioridad
-
+    this.Titulo = '';
+    this.Descripcion = '';
+    this.EstaCompleto = false;
+    this.PrioID = 1;
+    this.Prioridad = new Prioridad();
   }
 }

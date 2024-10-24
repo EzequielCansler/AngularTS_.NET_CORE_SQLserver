@@ -7,7 +7,7 @@ namespace ManejoInventario_AngularTS_.NET_CORE.Server.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; } 
+        public int? Id { get; set; } 
 
         [DataType(DataType.Text)]
         public string Titulo { get; set; } = string.Empty;
@@ -16,12 +16,11 @@ namespace ManejoInventario_AngularTS_.NET_CORE.Server.Models
         [Display(Description = "Que vas a hacer")]
         public string Descripcion { get; set; } = string.Empty;
 
-        [Required]
         public bool EstaCompleto { get; set; }
 
-        public int PrioID {  get; set; }  // "Baja", "Media", "Alta"
+        public int PrioID {  get; set; }  // "Alta", "Media", "Baja"
         [ForeignKey("PrioID")]
-        public Prioridad Prioridad { get; set; }
+        public Prioridad? Prioridad { get; set; }
         
     }
 
